@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>PetMatch – Pet Compatibility Finder</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script>
+    function showPage(pageId) {
+      document.getElementById('home').classList.add('hidden');
+      document.getElementById('find').classList.add('hidden');
+      document.getElementById('result').classList.add('hidden');
+      document.getElementById(pageId).classList.remove('hidden');
+    }
+    function findPet() {
+      const space = document.querySelector('input[name="space"]:checked')?.value;
+      const time = document.querySelector('input[name="time"]:checked')?.value;
+      const allergy = document.querySelector('input[name="allergy"]:checked')?.value;
+      let pet = '';
+      let img = '';
+
+      if (allergy === 'yes') {
+        pet = 'Fish';
+        img = 'https://images.unsplash.com/photo-1508672019048-805c876b67e2?auto=format&fit=crop&w=800&q=80';
+      } else if (space === 'big' && time === 'high') {
+        pet = 'Dog';
+        img = 'https://images.unsplash.com/photo-1552058544-f2b08422138a?auto=format&fit=crop&w=800&q=80';
+      } else if (space === 'small' && time === 'medium') {
+        pet = 'Cat';
+        img = 'https://images.unsplash.com/photo-1592194996308-7b43878e84a6?auto=format&fit=crop&w=800&q=80';
+      } else if (space === 'medium' && time === 'medium') {
+        pet = 'Rabbit';
+        img = 'https://images.unsplash.com/photo-1595433707802-6b2626ef97a4?auto=format&fit=crop&w=800&q=80';
+      } else if (space === 'small' && time === 'low') {
+        pet = 'Bird';
+        img = 'https://images.unsplash.com/photo-1501706362039-c6e80948a9f9?auto=format&fit=crop&w=800&q=80';
+      } else {
+        pet = 'Hamster';
+        img = 'https://images.unsplash.com/photo-1583512603705-7a4b86a1783a?auto=format&fit=crop&w=800&q=80';
+      }
+
+      document.getElementById('petName').innerText = pet;
+      document.getElementById('petImg').src = img;
+      showPage('result');
+    }
+  </script>
+</head>
+<body class="bg-gradient-to-r from-orange-200 via-yellow-100 to-red-200 min-h-screen">
+  <nav class="bg-orange-600 text-white p-4 shadow-lg">
+    <h1 class="text-3xl font-bold">🐾 PetMatch</h1>
+  </nav>
+
+  <section id="home" class="p-10 text-center">
+    <h2 class="text-4xl font-bold text-orange-700">Find Your Perfect Pet Companion</h2>
+    <p class="mt-4 text-lg">We help you choose a pet based on your lifestyle!</p>
+    <img class="mx-auto rounded-lg shadow-lg mt-6" src="https://images.unsplash.com/photo-1508672019048-805c876b67e2" width="500">
+    <button onclick="showPage('find')" class="mt-6 bg-orange-600 text-white px-6 py-3 rounded-lg hover:bg-orange-700">Start</button>
+  </section>
+
+  <section id="find" class="hidden p-10">
+    <h2 class="text-3xl font-bold text-orange-700">Tell Us About You</h2>
+    <div class="mt-6 bg-white p-6 rounded-lg shadow-lg">
+      <p class="font-semibold">1. How much space do you have?</p>
+      <label><input type="radio" name="space" value="small"> Small</label>
+      <label><input type="radio" name="space" value="big"> Big</label>
+
+      <p class="font-semibold mt-4">2. How much time can you spend daily?</p>
+      <label><input type="radio" name="time" value="low"> Low</label>
+      <label><input type="radio" name="time" value="medium"> Medium</label>
+      <label><input type="radio" name="time" value="high"> High</label>
+
+      <p class="font-semibold mt-4">3. Do you have allergies?</p>
+      <label><input type="radio" name="allergy" value="yes"> Yes</label>
+      <label><input type="radio" name="allergy" value="no"> No</label>
+
+      <button onclick="findPet()" class="block mt-6 bg-orange-600 text-white px-6 py-2 rounded hover:bg-orange-700">Find My Pet</button>
+    </div>
+  </section>
+
+  <section id="result" class="hidden p-10 text-center">
+    <h2 class="text-3xl font-bold text-orange-700">Your Perfect Match Is:</h2>
+    <h3 id="petName" class="text-4xl mt-4 font-bold"></h3>
+    <img id="petImg" class="mx-auto mt-4 rounded-lg shadow-lg" width="400">
+    <button onclick="showPage('home')" class="mt-6 bg-orange-600 text-white px-6 py-2 rounded">Go Home</button>
+  </section>
+
+</body>
+</html>
